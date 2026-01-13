@@ -1,0 +1,16 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: batch-service
+  datasource:
+    url: jdbc:h2:mem:insureflowx_db
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  batch:
+    job:
+      enabled: false // We will run manually or via scheduler
