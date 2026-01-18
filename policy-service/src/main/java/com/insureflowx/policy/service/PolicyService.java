@@ -27,7 +27,7 @@ public class PolicyService {
                 .premium(request.getPremium())
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
-                .status(PolicyStatus.DRAFT)
+                .status(PolicyStatus.PENDING_APPROVAL)
                 .build();
 
         Policy saved = policyRepository.save(policy);
@@ -44,6 +44,14 @@ public class PolicyService {
         return policyRepository.findAll().stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
+    }
+
+    public PolicyDTO.Response updateStatus(UUID id, PolicyStatus status) {
+        Policy policy = policyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Policy not found"));
+        policy.setStatus(status);
+        Policy saved = policyRepository.save(policy);
+        return mapToResponse(saved);
     }
 
     private PolicyDTO.Response mapToResponse(Policy policy) {

@@ -23,3 +23,14 @@ spring:
           uri: http://localhost:8084
           predicates:
             - Path=/api/payments/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"

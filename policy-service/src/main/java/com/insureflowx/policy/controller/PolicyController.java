@@ -1,5 +1,6 @@
 package com.insureflowx.policy.controller;
 
+import com.insureflowx.policy.domain.PolicyStatus;
 import com.insureflowx.policy.dto.PolicyDTO;
 import com.insureflowx.policy.service.PolicyService;
 import jakarta.validation.Valid;
@@ -32,5 +33,10 @@ public class PolicyController {
     @GetMapping
     public ResponseEntity<List<PolicyDTO.Response>> getAllPolicies() {
         return ResponseEntity.ok(policyService.getAllPolicies());
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<PolicyDTO.Response> updateStatus(@PathVariable UUID id, @RequestParam PolicyStatus status) {
+        return ResponseEntity.ok(policyService.updateStatus(id, status));
     }
 }
